@@ -1,26 +1,45 @@
+/*
+Please note that it's Function problem i.e.
+you need to write your solution in the form Function(s) only.
+Driver Code to call/invoke your function would be added by GfG's Online Judge.*/
 
-/*Complete the function below
-Node is as follows:
-struct Node{
-	int data;
-	Node *left,*right;
-};
-*/
-bool isIsomorphic(Node *root1,Node *root2)
+
+/* Link list Node
+struct Node
 {
-//add code here.
-    if(root1==NULL && root2==NULL){
-        return true;
+    int data;
+    struct Node* next;
+};*/
+/*You are required to complete this method*/
+Node * deleteK(Node *head,int k)
+{
+  //Your code here
+  Node *h= head;
+  Node *nxt,*prev;int i;
+  if(k==1){
+      free(head);
+      return NULL;
+  }
+  while(1){
+      i=0;
+      if(h==NULL)
+        break;
+    while(i<k-1 && h!=NULL){
+
+        prev=h;
+        h=h->next;
+        i++;
+
     }
-    if(root1==NULL|| root2==NULL)return false;
 
-
-    if(root1->data==root2->data){
-        if((isIsomorphic(root1->left,root2->right) && isIsomorphic(root1->right,root2 -> left))||(isIsomorphic(root1->left,root2->left) &&isIsomorphic(root1->right,root2->right))){
-            return true;
-
-        }
-        else return false;
+    if(h!=NULL && i==k-1){
+        //printf("ji");
+        nxt=h->next;
+        prev->next=nxt;
+        free(h);
+        h=nxt;
     }
-     else return false;
+  }
+
+  return head;
 }
